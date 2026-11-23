@@ -1,35 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="graphite">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Terms of Service for Classic Calc: 3D Calculator</title>
-  <meta name="description" content="The terms for using Classic Calc: 3D Calculator and buying premium themes.">
-  <meta name="theme-color" content="#2b2a28">
+  <meta name="description" content="The terms for using Classic Calc: 3D Calculator and buying Premium.">
+  <meta name="theme-color" content="#242427">
   <link rel="icon" type="image/png" href="assets/icon-192.png">
   <link rel="preload" href="fonts/BigShouldersDisplay-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+  <script>
+    /* Before the first paint: the theme chosen on the home page. */
+    (function (d) {
+      d.classList.add("js");
+      try { var t = localStorage.getItem("theme"); if (t) d.dataset.theme = t; } catch (e) {}
+    })(document.documentElement);
+  </script>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-  <header class="site-nav">
-    <nav class="container" aria-label="Main">
-      <a class="brand" href="./">
-        <img src="assets/icon-192.png" alt="" width="40" height="40">
-        <span>Classic Calc: 3D Calculator</span>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" data-nav>
+    <div class="nav-bar">
+      <a class="brand" href="./" aria-label="Classic Calc: 3D Calculator, home">
+        <img data-app-icon src="assets/icons/graphite.webp" alt="" width="36" height="36">
+        <span>Classic Calc</span>
       </a>
-      <ul class="nav-links">
-        <li><a class="text-link" href="privacy.html">Privacy</a></li>
-        <li><a class="text-link" href="terms.html" aria-current="page">Terms</a></li>
-      </ul>
-    </nav>
+      <nav class="nav-keep" aria-label="Main">
+        <ul class="nav-links">
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html" aria-current="page">Terms</a></li>
+        </ul>
+      </nav>
+      <div class="nav-progress" aria-hidden="true"><i data-progress></i></div>
+    </div>
   </header>
 
-  <main class="doc">
+  <main class="doc" id="main">
     <article class="container">
       <h1>Terms of Service</h1>
-      <p class="meta">Effective 22 November 2026</p>
+      <p class="meta">Effective 23 November 2026</p>
 
-      <p class="summary">Use the app freely for yourself. Premium themes are bought through Google Play and stay with your Google account. Double-check any result that really matters.</p>
+      <p class="summary">Use the app freely for yourself. Premium is bought through Google Play and stays with your Google account. Double-check any result that really matters.</p>
 
       <h2>1. Agreement</h2>
       <p>These terms are between you and Krushi Technolab (“we”, “us”), the maker of Classic Calc: 3D Calculator (“the app”). By downloading or using the app you agree to them. If you don’t agree, please don’t use the app. Our <a href="privacy.html">Privacy Policy</a> explains how we handle your information.</p>
@@ -42,20 +56,26 @@
         <li>get around the purchase system to use paid content without paying.</li>
       </ul>
 
-      <h2>3. Premium themes and purchases</h2>
+      <h2>3. Premium and purchases</h2>
       <h3>Buying</h3>
-      <p>Some themes are free; others are premium. Purchases are made through Google Play, at the price shown in the app in your local currency, and Google Play’s terms apply to the payment.</p>
+      <p>The calculator, three themes, the sounds and haptics, the preset discount buttons and (on phones in India) the preset GST buttons are free. The other themes, your full history, the GST split and a rate of your own are part of Premium. Purchases are made through Google Play, at the price shown in the app in your local currency, and Google Play’s terms apply to the payment.</p>
       <h3>One-time purchase</h3>
       <p>A lifetime purchase is a one-time payment. It is tied to the Google account you bought it with and works on any Android phone signed in to that account. If a reinstall or a new phone doesn’t show it, use Restore purchases in the app.</p>
       <h3>Subscriptions</h3>
-      <p>If we offer a subscription, it renews automatically at the end of each period until you cancel it in Google Play. You can cancel at any time; you keep premium until the end of the period you have paid for.</p>
+      <p>Premium may also be offered as a subscription, for a period shown in the app (such as a week, a month or a year). A subscription renews automatically at the end of each period until you cancel it in Google Play. You can cancel at any time; you keep Premium until the end of the period you have paid for. When a subscription ends, the Premium themes, the full history and the GST tools lock again. Your calculations stay saved on your phone, and without Premium only the newest one is shown.</p>
       <h3>Refunds</h3>
       <p>Refunds are handled under the <a href="https://support.google.com/googleplay/answer/2479637">Google Play refund policy</a>. If something went wrong with a purchase, write to us as well and we will help.</p>
-      <h3>What premium includes</h3>
-      <p>Premium gives you every premium theme in the app, including new premium themes we add while the app is offered. We may improve or adjust themes over time.</p>
+      <h3>What Premium includes</h3>
+      <ul>
+        <li>every Premium theme in the app, including new ones we add while the app is offered;</li>
+        <li>your full history: up to 100 calculations, to use again and to share;</li>
+        <li>the GST breakdown into CGST and SGST, or IGST (the GST buttons appear on phones in India);</li>
+        <li>a discount or tax rate of your own.</li>
+      </ul>
+      <p>We may improve or adjust what Premium includes over time.</p>
 
       <h2>4. Accuracy of results</h2>
-      <p>We work hard to make every calculation correct, but like any calculator, the app works with numbers of limited length and may round very large, very small or very long results. Please double-check any result you rely on for money, taxes, health, engineering or other important decisions. We are not responsible for losses caused by relying on a result without checking it.</p>
+      <p>We work hard to make every calculation correct, but like any calculator, the app works with numbers of limited length and may round very large, very small or very long results. The discount and GST tools work out amounts from the rate you tap or type and round them to two decimal places; the GST rates offered and the CGST, SGST and IGST split are a convenience, not tax advice, and you are responsible for choosing the rate that applies to you. Please double-check any result you rely on for money, taxes, health, engineering or other important decisions. We are not responsible for losses caused by relying on a result without checking it.</p>
 
       <h2>5. Ownership</h2>
       <p>The app, its design, 3D keys, themes, sounds and name belong to us or to those who licensed them to us. The display font, Big Shoulders Display, is used under the SIL Open Font License. These terms don’t give you any right to our trademarks or content beyond using the app.</p>
@@ -64,7 +84,7 @@
       <p>The app relies on Google Play, Firebase and RevenueCat. Their own terms and privacy policies apply to the parts they provide, and we aren’t responsible for their services being unavailable.</p>
 
       <h2>7. Updates and availability</h2>
-      <p>We may update the app, change features, or stop offering it. Some updates may be needed to keep using the app or the store. We will try to keep the premium themes you bought working for as long as the app is offered.</p>
+      <p>We may update the app, change features, or stop offering it. Some updates may be needed to keep using the app or the store. We will try to keep the Premium features you bought working for as long as the app is offered.</p>
 
       <h2>8. No warranty</h2>
       <p>The app is provided “as is” and “as available”. To the extent the law allows, we make no promises that it will be error-free or always available, and we disclaim all implied warranties, such as fitness for a particular purpose.</p>
@@ -98,5 +118,7 @@
       </div>
     </div>
   </footer>
+
+  <script src="js/site.js" defer></script>
 </body>
 </html>

@@ -1,20 +1,70 @@
+/* Design tokens. The colours are the app's own themes, taken from assets-out/themes/themes.json
+ * (linear RGB there, sRGB here). Each theme is the same set of names, so anything that carries
+ * data-theme="…" wears that theme: the whole page on <html>, or one swatch on its own. */
+
+/* Registered as colours so the page can fade from one theme to the next. */
+@property --plate    { syntax: "<color>"; inherits: true; initial-value: #242427; }
+@property --key      { syntax: "<color>"; inherits: true; initial-value: #3a3a3d; }
+@property --glyph    { syntax: "<color>"; inherits: true; initial-value: #c4c4c7; }
+@property --accent   { syntax: "<color>"; inherits: true; initial-value: #f99b38; }
+@property --fn       { syntax: "<color>"; inherits: true; initial-value: #fbb974; }
+@property --result   { syntax: "<color>"; inherits: true; initial-value: #f1f1ed; }
+@property --equation { syntax: "<color>"; inherits: true; initial-value: #959599; }
+@property --equals   { syntax: "<color>"; inherits: true; initial-value: #50aaff; }
+@property --shade    { syntax: "<color>"; inherits: true; initial-value: #ffffff; }
+
+/* plate: the background · key: raised surfaces · glyph: what is printed on a key
+ * accent: ÷ × − + · fn: C, backspace, % · result: the big number · equation: the line above it
+ * equals: the = key · shade: white on a dark theme, black on a light one */
+:root, [data-theme="graphite"] { --plate: #242427; --key: #3a3a3d; --glyph: #c4c4c7; --accent: #f99b38; --fn: #fbb974; --result: #f1f1ed; --equation: #959599; --equals: #50aaff; --on-accent: #111114; --on-equals: #111114; --shade: #ffffff; color-scheme: dark; }
+[data-theme="midnight"] { --plate: #101935; --key: #1d2b4d; --glyph: #cbdaef; --accent: #00e5da; --fn: #4cece5; --result: #eff7ff; --equation: #7690b3; --equals: #ffc450; --on-accent: #111114; --on-equals: #111114; --shade: #ffffff; color-scheme: dark; }
+[data-theme="cloud"] { --plate: #ececeb; --key: #f8f8f6; --glyph: #59595d; --accent: #279e3f; --fn: #64b976; --result: #303035; --equation: #6a6a6a; --equals: #3059c4; --on-accent: #111114; --on-equals: #ffffff; --shade: #000000; color-scheme: light; }
+[data-theme="neon"] { --plate: #0d0d19; --key: #191929; --glyph: #59f3ff; --accent: #ff59cb; --fn: #ff8bdb; --result: #59f3ff; --equation: #a07cf3; --equals: #95ff59; --on-accent: #111114; --on-equals: #111114; --shade: #ffffff; color-scheme: dark; }
+[data-theme="royal"] { --plate: #002c74; --key: #284590; --glyph: #fff6e3; --accent: #ffbe1f; --fn: #ffd262; --result: #fff4dc; --equation: #9ab6e2; --equals: #59d1ff; --on-accent: #111114; --on-equals: #111114; --shade: #ffffff; color-scheme: dark; }
+[data-theme="dragonfruit"] { --plate: #6d003d; --key: #860051; --glyph: #fff3f9; --accent: #ff43a1; --fn: #ff7bbd; --result: #feffff; --equation: #fbb6d9; --equals: #b5f85c; --on-accent: #111114; --on-equals: #111114; --shade: #ffffff; color-scheme: dark; }
+[data-theme="lagoon"] { --plate: #002e40; --key: #004f63; --glyph: #fffbeb; --accent: #ff9c00; --fn: #ffba4c; --result: #fff3d6; --equation: #96d7e2; --equals: #ff4462; --on-accent: #111114; --on-equals: #111114; --shade: #ffffff; color-scheme: dark; }
+[data-theme="mocha"] { --plate: #0d1f41; --key: #353d5b; --glyph: #ccd7ff; --accent: #ffa779; --fn: #ffc1a1; --result: #ffe0da; --equation: #b4bee4; --equals: #b5e795; --on-accent: #111114; --on-equals: #111114; --shade: #ffffff; color-scheme: dark; }
+[data-theme="mango"] { --plate: #f7b52c; --key: #f3f2ef; --glyph: #614b27; --accent: #d33819; --fn: #db5f46; --result: #593f19; --equation: #6a4812; --equals: #19597c; --on-accent: #ffffff; --on-equals: #ffffff; --shade: #000000; color-scheme: light; }
+[data-theme="santorini"] { --plate: #f2f6fa; --key: #feffff; --glyph: #000029; --accent: #0054d1; --fn: #4c87df; --result: #000029; --equation: #364b72; --equals: #df6607; --on-accent: #ffffff; --on-equals: #111114; --shade: #000000; color-scheme: light; }
+[data-theme="lemon"] { --plate: #fff067; --key: #fff8b6; --glyph: #000000; --accent: #007700; --fn: #4c9f4c; --result: #000000; --equation: #3a3900; --equals: #d83600; --on-accent: #ffffff; --on-equals: #ffffff; --shade: #000000; color-scheme: light; }
+[data-theme="lilac"] { --plate: #e7e0fb; --key: #f3efff; --glyph: #00003c; --accent: #623ad8; --fn: #9175e4; --result: #00003c; --equation: #4c487b; --equals: #df3276; --on-accent: #ffffff; --on-equals: #111114; --shade: #000000; color-scheme: light; }
+
 :root {
-  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
-  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
-  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
-  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
-  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
-  --container: 1120px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 96px; --section-gap: 144px; --section-gap-l: 176px;
-  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  color-scheme: dark;
-  --color-paper: oklch(23% 0.006 70); --color-paper-2: oklch(27% 0.007 70); --color-paper-3: oklch(31% 0.008 70);
-  --color-ink: oklch(95% 0.012 85); --color-ink-2: oklch(85% 0.01 85); --color-muted: oklch(71% 0.01 80);
-  --color-rule: oklch(37% 0.008 70);
-  --color-accent: oklch(76% 0.15 60); --color-accent-ink: oklch(22% 0.03 60); --color-focus: oklch(80% 0.14 62);
-  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif; --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; --font-outlier: var(--font-body);
-  --radius-card: 22px; --radius-control: 12px; --radius-pill: 999px; --rule-hair: 1px;
-  --shadow-card: 0 30px 60px oklch(10% 0.01 70 / 0.55);
-  --tracking-display: 0.005em; --display-weight: 800;
+  /* What the page is drawn with, worked out from the theme. */
+  --ink: var(--result);
+  --ink-2: var(--equation);
+  --sheet: color-mix(in oklab, var(--plate) 93%, var(--shade));
+  --sheet-2: color-mix(in oklab, var(--plate) 86%, var(--shade));
+  --rule: color-mix(in oklab, var(--plate) 82%, var(--shade));
+  --cast: color-mix(in oklab, var(--plate) 35%, #000);
+  /* The big number: the colour of the operators, or its own (the app's "Number in theme colour"). */
+  --num: var(--accent);
+
+  --font-display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Roboto Mono", Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem; --text-sm: 0.875rem; --text-md: 1.0625rem; --text-lg: 1.25rem;
+  --text-lead: clamp(1.125rem, 0.5vw + 1rem, 1.375rem);
+  --text-h3: clamp(1.5rem, 1vw + 1.1rem, 2rem);
+  --text-h2: clamp(2.5rem, 5vw + 1rem, 5.25rem);
+  --text-h1: clamp(3.5rem, 9.5vw + 0.5rem, 9rem);
+
+  --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px;
+  --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px;
+  --container: 1180px; --gutter: clamp(16px, 4vw, 48px);
+  --section-gap: clamp(72px, 11vw, 168px);
+
+  --radius-sm: 12px; --radius-md: 20px; --radius-lg: 32px; --radius-pill: 999px;
+
+  /* A key let go: past its place and back. */
+  --ease-bounce: cubic-bezier(0.3, 1.7, 0.45, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-press: 70ms; --dur-short: 220ms; --dur-long: 520ms; --dur-theme: 600ms;
+
+  --z-nav: 300; --z-skip: 400;
 }
+
+/* The app's setting "Number in theme colour", switched off. */
+:root[data-num="plain"] { --num: var(--result); }

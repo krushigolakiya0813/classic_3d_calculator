@@ -1,98 +1,447 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="graphite">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Classic Calc: 3D Calculator</title>
-  <meta name="description" content="A calculator for Android with big 3D keys that dip, bounce and click. Eleven themes, touch-tone sounds and haptics.">
-  <meta name="theme-color" content="#2b2a28">
+  <meta name="description" content="A calculator for Android with big 3D numbers and keys that bounce and click. Twelve themes, one-tap discounts and GST, and a history of your sums.">
+  <meta name="theme-color" content="#242427">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Classic Calc: 3D Calculator">
-  <meta property="og:description" content="Big 3D keys you can feel. Eleven themes for Android.">
+  <meta property="og:description" content="Numbers you can feel. Big 3D numbers, bouncy keys and twelve themes for Android.">
   <meta property="og:image" content="assets/icon-512.png">
   <link rel="icon" type="image/png" href="assets/icon-192.png">
   <link rel="apple-touch-icon" href="assets/icon-512.png">
   <link rel="preload" href="fonts/BigShouldersDisplay-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+  <script>
+    /* Before the first paint: the theme chosen last time, and the mark that scripts run. */
+    (function (d) {
+      d.classList.add("js");
+      try {
+        var t = localStorage.getItem("theme"), n = localStorage.getItem("num");
+        if (t) d.dataset.theme = t;
+        if (n === "plain") d.dataset.num = "plain";
+      } catch (e) {}
+    })(document.documentElement);
+  </script>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-  <header class="site-nav">
-    <nav class="container" aria-label="Main">
-      <a class="brand" href="./">
-        <img src="assets/icon-192.png" alt="" width="40" height="40">
-        <span>Classic Calc: 3D Calculator</span>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" data-nav>
+    <div class="nav-bar">
+      <a class="brand" href="./" aria-label="Classic Calc: 3D Calculator, home">
+        <img data-app-icon src="assets/icons/graphite.webp" alt="" width="36" height="36">
+        <span>Classic Calc</span>
       </a>
-      <ul class="nav-links">
-        <li><a class="text-link" href="privacy.html">Privacy</a></li>
-        <li><a class="text-link" href="terms.html">Terms</a></li>
-      </ul>
-    </nav>
+      <nav aria-label="Main">
+        <ul class="nav-links">
+          <li><a href="#feel">Feel</a></li>
+          <li><a href="#fix">Fix</a></li>
+          <li><a href="#themes">Themes</a></li>
+          <li><a href="#tools">Tools</a></li>
+          <li><a href="#private">Privacy</a></li>
+        </ul>
+      </nav>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.classic3dcalculator.app">Get it free</a>
+      <div class="nav-progress" aria-hidden="true"><i data-progress></i></div>
+    </div>
   </header>
 
-  <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container">
+  <main id="main">
+    <!-- Hero: the calculator itself, working -->
+    <section class="hero" data-hero aria-labelledby="hero-title">
+      <div class="glyph-field" aria-hidden="true">
+        <span style="--x:57%;--y:52%;--s:1.2;--z:.9;--t:9s">÷</span>
+        <span style="--x:44%;--y:8%;--s:.8;--z:.4;--t:12s">+</span>
+        <span style="--x:90%;--y:12%;--s:1.1;--z:.7;--t:10s">×</span>
+        <span style="--x:2%;--y:74%;--s:.9;--z:.5;--t:13s">%</span>
+        <span style="--x:47%;--y:82%;--s:1.3;--z:1;--t:11s">−</span>
+        <span style="--x:94%;--y:70%;--s:.9;--z:.6;--t:14s">=</span>
+      </div>
+
+      <div class="container hero-grid">
         <div class="hero-copy">
-          <h1 id="hero-title">Big 3D keys you can feel.</h1>
-          <p class="lead">Every key dips, bounces and clicks. Pick from eleven themes.</p>
-          <a class="play-badge badge-trim" href="https://play.google.com/store/apps/details?id=com.classic3dcalculator.app">
-            <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250">
-          </a>
-          <p class="fine">Free on Android 8 and later.</p>
+          <p class="pill"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>A calculator for Android</p>
+          <h1 id="hero-title" data-letters>Numbers you can <em>feel.</em></h1>
+          <p class="lead">Big 3D numbers. Keys that bounce and click. Twelve themes. This one works, so press a few keys.</p>
+          <div class="cta">
+            <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.classic3dcalculator.app">
+              <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250">
+            </a>
+            <p class="fine">Free on Android 8 and later.</p>
+          </div>
+          <ul class="trust">
+            <li>Free</li>
+            <li>No ads</li>
+            <li>No account</li>
+            <li>Works offline</li>
+          </ul>
         </div>
-        <figure class="hero-shot">
-          <img src="assets/hero-graphite.webp" width="630" height="1120" alt="The calculator in the Graphite theme, showing 128 × 4 + 6.5 with the answer 518.5 in large 3D numbers above a grid of raised keys.">
-        </figure>
+
+        <div class="hero-stage">
+          <div class="phone" data-calc>
+            <div class="phone-screen">
+              <div class="phone-top">
+                <button class="top-btn" type="button" data-next-theme aria-label="Next theme">
+                  <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                </button>
+                <a class="top-btn" href="#tools" aria-label="History, in the tools section">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4.5v4h4"/><path d="M12 7.5V12l3 2"/></svg>
+                </a>
+                <a class="top-btn top-btn-text" href="#tools">Discount</a>
+              </div>
+
+              <div class="display" data-display>
+                <div class="equation" data-equation></div>
+                <div class="bignum-box">
+                  <div class="burst" data-burst aria-hidden="true"></div>
+                  <div class="bignum" data-bignum aria-hidden="true"><span class="d">0</span></div>
+                </div>
+                <p class="visually-hidden" role="status" data-spoken></p>
+              </div>
+
+              <div class="keys" role="group" aria-label="Calculator keys">
+                <button type="button" class="key k-fn" data-key="C" aria-label="Clear"><span>C</span></button>
+                <button type="button" class="key k-fn" data-key="back" aria-label="Delete"><span><svg viewBox="0 0 34 24" aria-hidden="true"><path fill="currentColor" d="M11 1h20a2 2 0 0 1 2 2v18a2 2 0 0 1-2 2H11L1 12Z"/><path stroke="var(--plate)" stroke-width="3.2" stroke-linecap="round" d="m16.5 8 8 8m0-8-8 8"/></svg></span></button>
+                <button type="button" class="key k-fn" data-key="%" aria-label="Percent"><span>%</span></button>
+                <button type="button" class="key k-op" data-key="/" aria-label="Divided by"><span>÷</span></button>
+                <button type="button" class="key" data-key="7"><span>7</span></button>
+                <button type="button" class="key" data-key="8"><span>8</span></button>
+                <button type="button" class="key" data-key="9"><span>9</span></button>
+                <button type="button" class="key k-op" data-key="*" aria-label="Times"><span>×</span></button>
+                <button type="button" class="key" data-key="4"><span>4</span></button>
+                <button type="button" class="key" data-key="5"><span>5</span></button>
+                <button type="button" class="key" data-key="6"><span>6</span></button>
+                <button type="button" class="key k-op" data-key="-" aria-label="Minus"><span>−</span></button>
+                <button type="button" class="key" data-key="1"><span>1</span></button>
+                <button type="button" class="key" data-key="2"><span>2</span></button>
+                <button type="button" class="key" data-key="3"><span>3</span></button>
+                <button type="button" class="key k-op" data-key="+" aria-label="Plus"><span>+</span></button>
+                <button type="button" class="key" data-key="0"><span>0</span></button>
+                <button type="button" class="key" data-key="." aria-label="Point"><span>.</span></button>
+                <button type="button" class="key k-sign" data-key="neg" aria-label="Plus or minus"><span>+/−</span></button>
+                <button type="button" class="key k-eq" data-key="=" aria-label="Equals"><span>=</span></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="stage-bar">
+            <p class="stage-hint">Tap the keys<span class="kbd-hint">, or type on your keyboard</span>.</p>
+            <button class="chip-btn" type="button" data-sound-toggle aria-pressed="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5v5h3.5L12 18V6L7.5 9.5Z"/><path class="wave" d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a8 8 0 0 1 0 11"/></svg>
+              <span data-sound-label>Sound on</span>
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="themes-title">
+    <!-- Ticker: sums the app gets right -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track" data-ticker>
+        <span>2 + 3 × 4 = <b>14</b></span>
+        <span>0.1 + 0.2 = <b>0.3</b></span>
+        <span>100 + 10% = <b>110</b></span>
+        <span>1,280 × 4 + 6.5 = <b>5,126.5</b></span>
+        <span>7 ÷ 0 = <b>UNDEFINED</b></span>
+        <span>1,000 − 20% = <b>800</b></span>
+      </div>
+    </div>
+
+    <!-- 01 Feel -->
+    <section class="section" id="feel" aria-labelledby="feel-title">
       <div class="container">
-        <div class="section-head">
-          <h2 id="themes-title">Eleven themes, one feel.</h2>
-          <p>Graphite and Chalk are free. The other nine come with one purchase.</p>
+        <header class="section-head">
+          <p class="eyebrow" data-reveal><b>01</b>Feel</p>
+          <h2 id="feel-title" data-words>Every key answers back.</h2>
+          <p class="section-lead" data-reveal>A press makes the key dip and bounce, with a click you hear and a tap you feel. Press equals and the answer pops in, digit by digit.</p>
+        </header>
+
+        <div class="feel-grid">
+          <article class="card card-grab" data-reveal>
+            <div class="grab-stage" data-grab>
+              <div class="bignum bignum-xl" data-grab-num aria-hidden="true"><span class="d">5</span><span class="d">1</span><span class="d">8</span><span class="d">.</span><span class="d">5</span></div>
+            </div>
+            <div class="card-copy">
+              <h3>A number you can grab</h3>
+              <p>Drag the big number. It turns like a solid block, then swings back. Turn your phone and it does the same.</p>
+            </div>
+          </article>
+
+          <article class="card" data-reveal style="--d:1">
+            <div class="tone-pad" role="group" aria-label="Keys to try the sound with">
+              <button type="button" class="key" data-tone-key="1"><span>1</span></button>
+              <button type="button" class="key" data-tone-key="2"><span>2</span></button>
+              <button type="button" class="key" data-tone-key="3"><span>3</span></button>
+            </div>
+            <div class="seg" role="group" aria-label="Sound">
+              <button type="button" data-sound-mode="click" aria-pressed="true">Click</button>
+              <button type="button" data-sound-mode="tone" aria-pressed="false">Touch-tone</button>
+              <button type="button" data-sound-mode="off" aria-pressed="false">Off</button>
+            </div>
+            <div class="card-copy">
+              <h3>Two sounds, or none</h3>
+              <p>A soft click, or touch-tone: digits sound like the keys of a phone.</p>
+            </div>
+          </article>
+
+          <article class="card" data-reveal style="--d:2">
+            <div class="haptic-demo" aria-hidden="true">
+              <span class="haptic-phone"><i></i></span>
+            </div>
+            <div class="card-copy">
+              <h3>A tap for every press</h3>
+              <p>Haptics follow what happened: one tap for a digit, another for an operator, another for the answer.<span data-vibrate-note hidden> This page buzzes too, on the calculator above.</span></p>
+            </div>
+          </article>
         </div>
-        <ul class="rail">
-          <li><img src="assets/themes/graphite.webp" width="420" height="747" loading="lazy" alt="Graphite theme: warm grey keys with orange symbols."><span class="name"><strong>Graphite</strong><span class="tier">Free</span></span></li>
-          <li><img src="assets/themes/chalk.webp" width="420" height="747" loading="lazy" alt="Chalk theme: light cream keys with dark numbers."><span class="name"><strong>Chalk</strong><span class="tier">Free</span></span></li>
-          <li><img src="assets/themes/midnight.webp" width="420" height="747" loading="lazy" alt="Midnight theme: deep navy keys with teal symbols."><span class="name"><strong>Midnight</strong><span class="tier">Premium</span></span></li>
-          <li><img src="assets/themes/matcha.webp" width="420" height="747" loading="lazy" alt="Matcha theme: soft green keys and dark green numbers."><span class="name"><strong>Matcha</strong><span class="tier">Premium</span></span></li>
-          <li><img src="assets/themes/coral.webp" width="420" height="747" loading="lazy" alt="Coral theme: coral keys with deep red numbers."><span class="name"><strong>Coral</strong><span class="tier">Premium</span></span></li>
-          <li><img src="assets/themes/gold.webp" width="420" height="747" loading="lazy" alt="Gold theme: dark keys with glowing gold numbers."><span class="name"><strong>Gold</strong><span class="tier">Premium</span></span></li>
-          <li><img src="assets/themes/neon.webp" width="420" height="747" loading="lazy" alt="Neon theme: dark keys with glowing cyan digits and pink symbols."><span class="name"><strong>Neon</strong><span class="tier">Premium</span></span></li>
+      </div>
+    </section>
+
+    <!-- 02 Fix -->
+    <section class="section" id="fix" aria-labelledby="fix-title">
+      <div class="container split">
+        <div class="split-demo" data-reveal>
+          <div class="screen" data-fix aria-hidden="true">
+            <div class="equation"><span class="tok" data-fix-num>128</span><span class="op">×</span><span class="tok">4</span><span class="op">+</span><span class="tok">6.5</span></div>
+            <div class="bignum" data-fix-answer><span class="d">5</span><span class="d">1</span><span class="d">8</span><span class="d">.</span><span class="d">5</span></div>
+            <span class="finger"></span>
+            <div class="fix-keys"><i data-fix-key="1">1</i><i data-fix-key="2">2</i><i data-fix-key="8">8</i><i data-fix-key="0">0</i></div>
+          </div>
+        </div>
+        <div class="split-copy">
+          <p class="eyebrow" data-reveal><b>02</b>Fix</p>
+          <h2 id="fix-title" data-words>Wrong number? Tap it.</h2>
+          <p class="section-lead" data-reveal>The whole sum stays on screen. Tap any number in it and type the right one. The answer changes as you type.</p>
+          <ul class="points" data-reveal>
+            <li><b>Swipe sideways</b> on the display to delete a digit.</li>
+            <li><b>Hold the display</b> to copy, paste or share.</li>
+            <li><b>Try it above:</b> type a sum, then tap one of its numbers.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Themes -->
+    <section class="section" id="themes" aria-labelledby="themes-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal><b>03</b>Themes</p>
+          <h2 id="themes-title" data-words>Twelve themes. Try one on.</h2>
+          <p class="section-lead" data-reveal>Tap a theme and this whole page wears it. Graphite, Midnight and Cloud are free. The other nine come with Premium, and you can try each one in the app before you unlock it.</p>
+        </header>
+
+        <ul class="swatches" data-swatches>
+          <li data-reveal style="--d:0"><button type="button" class="swatch" data-set-theme="graphite" aria-pressed="true"><span class="swatch-face" data-theme="graphite"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Graphite</span><span class="swatch-tier">Free</span></button></li>
+          <li data-reveal style="--d:1"><button type="button" class="swatch" data-set-theme="midnight" aria-pressed="false"><span class="swatch-face" data-theme="midnight"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Midnight</span><span class="swatch-tier">Free</span></button></li>
+          <li data-reveal style="--d:2"><button type="button" class="swatch" data-set-theme="cloud" aria-pressed="false"><span class="swatch-face" data-theme="cloud"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Cloud</span><span class="swatch-tier">Free</span></button></li>
+          <li data-reveal style="--d:3"><button type="button" class="swatch" data-set-theme="neon" aria-pressed="false"><span class="swatch-face" data-theme="neon"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Neon</span><span class="swatch-tier pro">Pro</span></button></li>
+          <li data-reveal style="--d:4"><button type="button" class="swatch" data-set-theme="royal" aria-pressed="false"><span class="swatch-face" data-theme="royal"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Royal</span><span class="swatch-tier pro">Pro</span></button></li>
+          <li data-reveal style="--d:5"><button type="button" class="swatch" data-set-theme="dragonfruit" aria-pressed="false"><span class="swatch-face" data-theme="dragonfruit"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Dragon Fruit</span><span class="swatch-tier pro">Pro</span></button></li>
+          <li data-reveal style="--d:6"><button type="button" class="swatch" data-set-theme="lagoon" aria-pressed="false"><span class="swatch-face" data-theme="lagoon"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Lagoon</span><span class="swatch-tier pro">Pro</span></button></li>
+          <li data-reveal style="--d:7"><button type="button" class="swatch" data-set-theme="mocha" aria-pressed="false"><span class="swatch-face" data-theme="mocha"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Mocha</span><span class="swatch-tier pro">Pro</span></button></li>
+          <li data-reveal style="--d:8"><button type="button" class="swatch" data-set-theme="mango" aria-pressed="false"><span class="swatch-face" data-theme="mango"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Mango</span><span class="swatch-tier pro">Pro</span></button></li>
+          <li data-reveal style="--d:9"><button type="button" class="swatch" data-set-theme="santorini" aria-pressed="false"><span class="swatch-face" data-theme="santorini"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Santorini</span><span class="swatch-tier pro">Pro</span></button></li>
+          <li data-reveal style="--d:10"><button type="button" class="swatch" data-set-theme="lemon" aria-pressed="false"><span class="swatch-face" data-theme="lemon"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Lemon</span><span class="swatch-tier pro">Pro</span></button></li>
+          <li data-reveal style="--d:11"><button type="button" class="swatch" data-set-theme="lilac" aria-pressed="false"><span class="swatch-face" data-theme="lilac"><span class="swatch-key">5<i></i></span></span><span class="swatch-name">Lilac</span><span class="swatch-tier pro">Pro</span></button></li>
         </ul>
-        <p class="rail-note">Plus Mango, Forest, Peach and Cloud in the app.</p>
-      </div>
-    </section>
 
-    <section class="section" aria-labelledby="try-title">
-      <div class="container">
-        <div class="section-head">
-          <h2 id="try-title">Three things to try first.</h2>
+        <div class="theme-extras">
+          <article class="card card-row" data-reveal>
+            <div class="icon-home" aria-hidden="true">
+              <img data-app-icon src="assets/icons/graphite.webp" alt="" width="96" height="96" loading="lazy">
+              <span>3D Calculator</span>
+            </div>
+            <div class="card-copy">
+              <h3>The app icon changes too</h3>
+              <p>Pick a theme and the icon on your home screen takes its colours. One switch turns that off.</p>
+            </div>
+          </article>
+
+          <article class="card card-row" data-reveal style="--d:1">
+            <div class="num-demo" aria-hidden="true"><div class="bignum"><span class="d">5</span></div></div>
+            <div class="card-copy">
+              <h3>Pick the colour of the number</h3>
+              <p>The big number can match the operators, or keep a colour of its own.</p>
+              <button class="switch" type="button" role="switch" aria-checked="true" data-num-switch><span class="switch-track"><i></i></span>Number in theme colour</button>
+            </div>
+          </article>
         </div>
-        <ul class="moments">
-          <li>
-            <h3>Big 3D keys</h3>
-            <p>Every key dips, bounces and clicks. Turn on touch-tone and digits sound like the keys of a phone.</p>
-          </li>
-          <li>
-            <h3>Fix mistakes</h3>
-            <p>Typed a wrong number? Tap it in the line above and type the right one.</p>
-          </li>
-          <li>
-            <h3>Copy and themes</h3>
-            <p>Hold the answer to copy it. The button at the top left has themes and all settings.</p>
-          </li>
-        </ul>
       </div>
     </section>
 
-    <section class="section closing" aria-labelledby="get-title">
+    <!-- 04 Tools -->
+    <section class="section" id="tools" aria-labelledby="tools-title">
       <div class="container">
-        <h2 id="get-title">Press a few keys.</h2>
-        <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.classic3dcalculator.app">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal><b>04</b>Tools</p>
+          <h2 id="tools-title" data-words>Discount and GST in one tap.</h2>
+          <p class="section-lead" data-reveal>Type an amount, tap a rate. The sum it worked out stays on the display and in your history, like any other.</p>
+        </header>
+
+        <div class="tools-grid">
+          <article class="card card-quick" data-reveal data-quick>
+            <div class="quick-main">
+              <div class="seg" role="group" aria-label="What to work out">
+                <button type="button" data-quick-kind="discount" aria-pressed="true">Discount</button>
+                <button type="button" data-quick-kind="add" aria-pressed="false">Add GST</button>
+                <button type="button" data-quick-kind="remove" aria-pressed="false">Remove GST</button>
+              </div>
+              <p class="quick-amount"><span data-quick-equation>1,000 − 20%</span><b class="num" data-quick-total>800</b></p>
+              <div class="rates" data-quick-rates role="group" aria-label="Rate"></div>
+              <p class="quick-note" data-quick-note>Rates of 5, 10, 20, 25 and 50% are free. The bill and a rate of your own come with Premium.</p>
+            </div>
+            <div class="bill-tray">
+              <p class="bill-head">The bill <span class="swatch-tier pro">Pro</span></p>
+              <dl class="bill" data-quick-bill>
+                <div><dt>Price</dt><dd class="num">1,000</dd></div>
+                <div><dt>Discount 20%</dt><dd class="num">−200</dd></div>
+                <div class="bill-total"><dt>You pay</dt><dd class="num">800</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="card" data-reveal style="--d:1">
+            <ol class="history" data-history>
+              <li><span>1,280 × 4 + 6.5</span><b class="num">5,126.5</b></li>
+              <li><span>100 + 10%</span><b class="num">110</b></li>
+              <li><span>2 + 3 × 4</span><b class="num">14</b></li>
+            </ol>
+            <div class="card-copy">
+              <h3>History</h3>
+              <p>Every answer you get with equals is kept on your phone, a hundred of them. Tap one to use it again. The newest is free; Premium opens them all.</p>
+            </div>
+          </article>
+
+          <article class="card" data-reveal style="--d:2">
+            <div class="share-demo" aria-hidden="true">
+              <div class="menu-pill"><span>Copy</span><span>Paste</span><span>Share</span></div>
+              <div class="share-card">
+                <span class="share-eq">1,280 × 4 + 6.5</span>
+                <div class="bignum"><span class="d">5</span><span class="d">,</span><span class="d">1</span><span class="d">2</span><span class="d">6</span><span class="d">.</span><span class="d">5</span></div>
+                <span class="share-foot"><img data-app-icon src="assets/icons/graphite.webp" alt="" width="18" height="18" loading="lazy">3D Calculator</span>
+              </div>
+            </div>
+            <div class="card-copy">
+              <h3>Copy, paste, share</h3>
+              <p>Hold the display to copy the answer, paste a number in, or share the sum as a picture in your theme.</p>
+            </div>
+          </article>
+        </div>
+        <p class="footnote" data-reveal>The GST buttons appear on phones in India: 3, 5, 18 and 40%, added or taken out. Premium splits the tax into CGST and SGST, or shows it as IGST.</p>
+      </div>
+    </section>
+
+    <!-- 05 Maths -->
+    <section class="section" id="maths" aria-labelledby="maths-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal><b>05</b>Maths</p>
+          <h2 id="maths-title" data-words>It gets the sums right.</h2>
+        </header>
+        <ul class="proofs">
+          <li class="proof" data-reveal style="--d:0"><p class="proof-sum"><span>2 + 3 × 4</span><b>14</b></p><h3>Order of operations</h3><p>Times and divide go first, the way you learned it.</p></li>
+          <li class="proof" data-reveal style="--d:1"><p class="proof-sum"><span>0.1 + 0.2</span><b>0.3</b></p><h3>Exact decimals</h3><p>Not 0.30000000000000004. Decimal maths, done exactly.</p></li>
+          <li class="proof" data-reveal style="--d:2"><p class="proof-sum"><span>100 + 10%</span><b>110</b></p><h3>Percent like a phone</h3><p>Ten percent of what you had, added on.</p></li>
+          <li class="proof" data-reveal style="--d:3"><p class="proof-sum"><span>7 ÷ 0</span><b>UNDEFINED</b></p><h3>Honest errors</h3><p>Spelled out in the same big 3D letters as the answer.</p></li>
+          <li class="proof" data-reveal style="--d:4"><p class="proof-sum"><span>India</span><b>12,50,000</b></p><h3>Your country’s numbers</h3><p>Grouped the way you write them, lakh and crore included.</p></li>
+          <li class="proof" data-reveal style="--d:5"><p class="proof-sum"><span>Language</span><b>हिन्दी · ES · EN</b></p><h3>Made for more people</h3><p>English, Hindi and Spanish. Portrait and landscape. TalkBack reads every key.</p></li>
+        </ul>
+        <p class="footnote" data-reveal>On an older phone the app measures its own speed on first start and switches to a lighter 3D mode, so the keys stay quick.</p>
+      </div>
+    </section>
+
+    <!-- 06 Private -->
+    <section class="section" id="private" aria-labelledby="private-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal><b>06</b>Private</p>
+          <h2 id="private-title" data-words>Your sums stay on your phone.</h2>
+          <p class="section-lead" data-reveal>Everything you type is worked out on your phone and is never sent anywhere. The calculator works fully offline.</p>
+        </header>
+        <ul class="zeros">
+          <li data-reveal style="--d:0"><div class="bignum" aria-hidden="true"><span class="d">0</span></div><h3>ads</h3><p>None, in the free app or in Premium.</p></li>
+          <li data-reveal style="--d:1"><div class="bignum" aria-hidden="true"><span class="d">0</span></div><h3>accounts</h3><p>Nothing to sign up for. Open it and type.</p></li>
+          <li data-reveal style="--d:2"><div class="bignum" aria-hidden="true"><span class="d">0</span></div><h3>sums sent</h3><p>Worked out on your phone, online or off.</p></li>
+        </ul>
+        <p class="footnote" data-reveal>The app does send anonymous usage statistics and crash reports, and uses the internet for purchases. The <a href="privacy.html">privacy policy</a> lists exactly what.</p>
+      </div>
+    </section>
+
+    <!-- Free and Premium -->
+    <section class="section" id="premium" aria-labelledby="premium-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal><b>07</b>Free and Premium</p>
+          <h2 id="premium-title" data-words>Free to use. More if you want it.</h2>
+        </header>
+        <div class="plans">
+          <article class="card plan" data-reveal>
+            <h3>Free</h3>
+            <ul class="ticks">
+              <li>The whole calculator, with no ads</li>
+              <li>Graphite, Midnight and Cloud</li>
+              <li>Sounds, touch-tone and haptics</li>
+              <li>One-tap discounts, and GST in India</li>
+              <li>Your newest calculation in the history</li>
+            </ul>
+          </article>
+          <article class="card plan plan-pro" data-reveal style="--d:1">
+            <h3>Premium <span class="swatch-tier pro">Pro</span></h3>
+            <ul class="ticks">
+              <li>Nine more themes</li>
+              <li>Your full history, to use again and share</li>
+              <li>The GST split: CGST, SGST and IGST</li>
+              <li>A discount or tax rate of your own</li>
+              <li>New themes and features as they arrive</li>
+            </ul>
+            <p class="plan-note">Bought through Google Play, and yours on any phone with the same Google account.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Questions -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-wrap">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal><b>08</b>Questions</p>
+          <h2 id="faq-title" data-words>Quick answers.</h2>
+        </header>
+        <div class="faq" data-reveal>
+          <details>
+            <summary>Is it really free?</summary>
+            <p>Yes. The calculator, three themes, the sounds and the quick discounts are free, with no ads. Premium adds nine themes, the full history and the GST tools.</p>
+          </details>
+          <details>
+            <summary>Does it need the internet?</summary>
+            <p>No. Sums work offline. The internet is only used to show prices, to buy or restore Premium, and to send anonymous statistics and crash reports.</p>
+          </details>
+          <details>
+            <summary>Which phones does it run on?</summary>
+            <p>Android 8 and later. Slower phones get a lighter 3D mode automatically.</p>
+          </details>
+          <details>
+            <summary>Can I try a Premium theme first?</summary>
+            <p>Yes. Tap any theme in the app to see it on your calculator. Unlock Premium to keep it.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing -->
+    <section class="closing" id="get" aria-labelledby="get-title">
+      <div class="container">
+        <div class="closing-keys" aria-hidden="true"><span>7</span><span>8</span><span>9</span><span class="op">×</span><span>4</span><span>5</span><span>6</span><span class="op">−</span><span class="eq">=</span></div>
+        <h2 id="get-title" data-words>Press a few keys.</h2>
+        <a class="play-badge play-badge-lg" href="https://play.google.com/store/apps/details?id=com.classic3dcalculator.app" data-reveal>
           <img src="assets/google-play-badge.png" alt="Get it on Google Play" width="646" height="250" loading="lazy">
         </a>
+        <p class="fine" data-reveal>Free on Android 8 and later.</p>
       </div>
     </section>
   </main>
@@ -100,15 +449,20 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-row">
-        <span>© 2026 Krushi Technolab</span>
+        <a class="brand" href="./">
+          <img data-app-icon src="assets/icons/graphite.webp" alt="" width="32" height="32" loading="lazy">
+          <span>Classic Calc: 3D Calculator</span>
+        </a>
         <ul class="footer-links">
           <li><a class="text-link" href="privacy.html">Privacy policy</a></li>
           <li><a class="text-link" href="terms.html">Terms of service</a></li>
           <li><a class="text-link" href="mailto:krushigolakiya0813@gmail.com?subject=3D%20Calculator%20support">Contact support</a></li>
         </ul>
       </div>
-      <p>Google Play and the Google Play logo are trademarks of Google LLC.</p>
+      <p>© 2026 Krushi Technolab. Google Play and the Google Play logo are trademarks of Google LLC.</p>
     </div>
   </footer>
+
+  <script src="js/site.js" defer></script>
 </body>
 </html>
